@@ -18,16 +18,14 @@ import { FilterBar } from './components/FilterBar';
 import { ProfessorCard } from './components/ProfessorCard';
 import { ProfessorDetailModal } from './components/ProfessorDetailModal';
 import { ComparisonDrawer } from './components/ComparisonDrawer';
-import { AdvisorQuizModal } from './components/AdvisorQuizModal';
 import { BookmarksModal } from './components/BookmarksModal';
 import { Footer } from './components/Footer';
 import {
-  Sparkles,
   Scale,
   CheckCircle2,
   Info,
   ArrowUpDown,
-  Compass,
+  BookOpen,
 } from 'lucide-react';
 
 export default function App() {
@@ -46,7 +44,6 @@ export default function App() {
   // Modal States
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
   const [isComparisonOpen, setIsComparisonOpen] = useState<boolean>(false);
-  const [isQuizOpen, setIsQuizOpen] = useState<boolean>(false);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -209,7 +206,6 @@ export default function App() {
         comparisonCount={comparingIds.length}
         onOpenBookmarks={() => setIsBookmarksOpen(true)}
         onOpenComparison={() => setIsComparisonOpen(true)}
-        onOpenQuiz={() => setIsQuizOpen(true)}
         onScrollToExplore={scrollToExplore}
       />
 
@@ -217,7 +213,6 @@ export default function App() {
       <HeroSection
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
-        onOpenQuiz={() => setIsQuizOpen(true)}
         totalProfessors={professors.length}
       />
 
@@ -331,38 +326,38 @@ export default function App() {
             </div>
           )}
 
-          {/* Information Banner for Students */}
+          {/* Information Banner for Students (No quiz - Committee Selection Notice) */}
           <div className="mt-14 p-6 sm:p-8 bg-emerald-900 text-white rounded-2xl shadow-sm grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="md:col-span-2 space-y-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-emerald-300 uppercase tracking-wider">
-                <Compass className="w-4 h-4" />
+                <Info className="w-4 h-4" />
                 <span>คำแนะนำสำหรับนักเรียน</span>
               </div>
               <h3 className="text-xl font-bold font-serif text-white">
-                ยังไม่แน่ใจว่าจะเลือกอาจารย์ท่านใด?
+                การจัดสรรอาจารย์ที่ปรึกษาและโครงงานวิจัย
               </h3>
               <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
-                ทำแบบประเมินสั้น ๆ 3 ข้อ เพื่อค้นหาอาจารย์และโครงงานที่ตรงกับความสนใจ
-                ความถนัด และตารางเวลาที่คุณสะดวกที่สุด หรือเลือกเปรียบเทียบข้อมูลแบบเคียงข้างกันได้ทันที
+                นักเรียนสามารถศึกษาข้อมูลโครงงานวิจัย ความเชี่ยวชาญเฉพาะด้าน และรูปแบบการเข้าคณะของอาจารย์ทั้ง 7 ท่าน
+                เพื่อใช้ประกอบการตัดสินใจ โดยคณะกรรมการจะเป็นผู้พิจารณาและจัดสรรอาจารย์ที่ปรึกษาที่เหมาะสมให้แก่นักเรียน
               </p>
             </div>
             <div className="flex flex-col sm:flex-row md:flex-col gap-3 justify-center md:items-end">
-              <button
-                onClick={() => setIsQuizOpen(true)}
-                className="px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
-              >
-                <Sparkles className="w-4 h-4 text-slate-900" />
-                <span>เริ่มทำแบบประเมิน (3 ข้อ)</span>
-              </button>
               <button
                 onClick={() => {
                   setComparingIds(['chutima', 'waranee', 'thawatchai']);
                   setIsComparisonOpen(true);
                 }}
+                className="px-5 py-3 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-xs rounded-xl shadow-xs transition-colors flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+              >
+                <Scale className="w-4 h-4 text-slate-900" />
+                <span>เปิดตารางเปรียบเทียบโครงงาน</span>
+              </button>
+              <button
+                onClick={scrollToExplore}
                 className="px-4 py-2.5 bg-emerald-950/60 hover:bg-emerald-950 text-white text-xs font-medium rounded-xl border border-emerald-700/50 transition-colors flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
               >
-                <Scale className="w-3.5 h-3.5" />
-                <span>ดูตัวอย่างการเปรียบเทียบ</span>
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>ดูรายชื่ออาจารย์ทั้งหมด</span>
               </button>
             </div>
           </div>
@@ -388,13 +383,6 @@ export default function App() {
         professors={comparedProfessorsList}
         onRemoveProfessor={handleRemoveCompare}
         onClearAll={handleClearCompare}
-        onSelectProfessor={(prof) => setSelectedProfessor(prof)}
-      />
-
-      <AdvisorQuizModal
-        isOpen={isQuizOpen}
-        onClose={() => setIsQuizOpen(false)}
-        professors={professors}
         onSelectProfessor={(prof) => setSelectedProfessor(prof)}
       />
 

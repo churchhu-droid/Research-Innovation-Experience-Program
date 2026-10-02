@@ -1,18 +1,16 @@
 import React from 'react';
-import { Search, Sparkles, BookOpen, Users, Award, ShieldCheck } from 'lucide-react';
+import { Search } from 'lucide-react';
 import heroImg from '../assets/images/hero_pharmacy_research_1790908936189.jpg';
 
 interface HeroSectionProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  onOpenQuiz: () => void;
   totalProfessors: number;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   searchQuery,
   onSearchChange,
-  onOpenQuiz,
   totalProfessors,
 }) => {
   return (
@@ -55,7 +53,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder="ค้นหาชื่ออาจารย์, สาขาวิชา, หัวข้อวิจัย (เช่น ไฮโดรเจล, เชลแล็ก, AI, Meta-analysis)..."
-                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-white/20 transition-all shadow-inner"
+                className="w-full pl-12 pr-12 py-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-white/20 transition-all shadow-inner"
               />
               {searchQuery && (
                 <button
@@ -66,14 +64,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </button>
               )}
             </div>
-
-            <button
-              onClick={onOpenQuiz}
-              className="px-5 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm whitespace-nowrap cursor-pointer"
-            >
-              <Sparkles className="w-4 h-4 text-amber-200" />
-              <span>ทำแบบประเมินแนะนำอาจารย์</span>
-            </button>
           </div>
 
           {/* Quick Quantitative Facts */}

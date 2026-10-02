@@ -1,12 +1,11 @@
 import React from 'react';
-import { Bookmark, Compass, Scale } from 'lucide-react';
+import { Bookmark, Scale } from 'lucide-react';
 
 interface NavbarProps {
   bookmarksCount: number;
   comparisonCount: number;
   onOpenBookmarks: () => void;
   onOpenComparison: () => void;
-  onOpenQuiz: () => void;
   onScrollToExplore: () => void;
 }
 
@@ -15,7 +14,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   comparisonCount,
   onOpenBookmarks,
   onOpenComparison,
-  onOpenQuiz,
   onScrollToExplore,
 }) => {
   return (
@@ -34,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </span>
         </a>
 
-        {/* Zone 2: 4-6 clean text navigation links */}
+        {/* Zone 2: clean text navigation links */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
           <button
             onClick={onScrollToExplore}
@@ -43,18 +41,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             รายชื่ออาจารย์ (7 ท่าน)
           </button>
           <button
-            onClick={onOpenQuiz}
-            className="hover:text-emerald-800 transition-colors cursor-pointer flex items-center gap-1.5"
-          >
-            <Compass className="w-4 h-4 text-emerald-700" />
-            แบบประเมินค้นหาอาจารย์
-          </button>
-          <button
             onClick={onOpenComparison}
             className="hover:text-emerald-800 transition-colors cursor-pointer flex items-center gap-1.5"
           >
             <Scale className="w-4 h-4 text-emerald-700" />
-            เปรียบเทียบ ({comparisonCount})
+            เปรียบเทียบข้อมูล ({comparisonCount})
           </button>
           <a
             href="https://www.pharmacy.su.ac.th"
@@ -66,23 +57,23 @@ export const Navbar: React.FC<NavbarProps> = ({
           </a>
         </nav>
 
-        {/* Zone 3: 1-2 primary actions */}
+        {/* Zone 3: primary actions */}
         <div className="flex items-center gap-2.5">
           <button
             onClick={onOpenComparison}
-            className={`md:hidden px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors flex items-center gap-1 ${
+            className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors flex items-center gap-1 cursor-pointer ${
               comparisonCount > 0
                 ? 'border-emerald-700 text-emerald-800 bg-emerald-50'
                 : 'border-slate-200 text-slate-700 hover:bg-slate-50'
             }`}
           >
             <Scale className="w-3.5 h-3.5" />
-            <span>เทียบ ({comparisonCount})</span>
+            <span>เปรียบเทียบ ({comparisonCount})</span>
           </button>
 
           <button
             onClick={onOpenBookmarks}
-            className={`px-3.5 py-2 text-xs font-semibold rounded-lg border transition-colors flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg border transition-colors flex items-center gap-1.5 cursor-pointer ${
               bookmarksCount > 0
                 ? 'border-emerald-600 bg-emerald-50 text-emerald-800'
                 : 'border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -91,13 +82,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Bookmark className={`w-3.5 h-3.5 ${bookmarksCount > 0 ? 'fill-emerald-700 text-emerald-700' : ''}`} />
             <span className="whitespace-nowrap">บันทึกไว้ ({bookmarksCount})</span>
-          </button>
-
-          <button
-            onClick={onOpenQuiz}
-            className="hidden sm:inline-flex px-4 py-2 text-xs font-semibold text-white bg-emerald-800 rounded-lg hover:bg-emerald-900 transition-colors shadow-xs whitespace-nowrap cursor-pointer"
-          >
-            ค้นหาโปรเจกต์ที่ใช่
           </button>
         </div>
       </div>
