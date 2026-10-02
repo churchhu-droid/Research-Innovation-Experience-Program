@@ -77,9 +77,22 @@ export const ComparisonDrawer: React.FC<ComparisonDrawerProps> = ({
                   {professors.map((prof) => (
                     <th key={prof.id} className="p-4 min-w-[260px] max-w-[320px] align-top bg-emerald-50/40 border-l border-slate-200">
                       <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <div className="font-bold text-slate-900 text-sm">{prof.name}</div>
-                          <div className="text-2xs text-slate-500 mt-0.5">{prof.departmentNameTh}</div>
+                        <div className="flex items-start gap-2.5">
+                          <div className="w-10 h-10 rounded-lg overflow-hidden bg-emerald-800 text-amber-200 font-serif font-bold text-sm flex items-center justify-center shrink-0 border border-slate-200 shadow-2xs">
+                            {prof.imageUrl ? (
+                              <img
+                                src={prof.imageUrl}
+                                alt={prof.name}
+                                className="w-full h-full object-cover object-top"
+                              />
+                            ) : (
+                              prof.avatarInitial
+                            )}
+                          </div>
+                          <div>
+                            <div className="font-bold text-slate-900 text-sm leading-tight">{prof.name}</div>
+                            <div className="text-2xs text-slate-500 mt-0.5">{prof.departmentNameTh}</div>
+                          </div>
                         </div>
                         <button
                           onClick={() => onRemoveProfessor(prof.id)}

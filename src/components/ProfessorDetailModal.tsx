@@ -112,8 +112,16 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-1">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-800 text-amber-200 font-serif font-bold text-2xl flex items-center justify-center shrink-0 border border-emerald-700/50 shadow-sm">
-              {professor.avatarInitial}
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-emerald-800 text-amber-200 font-serif font-bold text-2xl flex items-center justify-center shrink-0 border-2 border-emerald-600/40 shadow-md">
+              {professor.imageUrl ? (
+                <img
+                  src={professor.imageUrl}
+                  alt={professor.name}
+                  className="w-full h-full object-cover object-top"
+                />
+              ) : (
+                professor.avatarInitial
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-serif">

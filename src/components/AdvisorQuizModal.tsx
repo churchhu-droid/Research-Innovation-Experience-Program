@@ -284,8 +284,16 @@ export const AdvisorQuizModal: React.FC<AdvisorQuizModalProps> = ({
                     className="p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-600 hover:shadow-xs transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                   >
                     <div className="flex items-start gap-3.5">
-                      <div className="w-12 h-12 rounded-xl bg-emerald-800 text-amber-200 font-serif font-bold text-lg flex items-center justify-center shrink-0">
-                        {professor.avatarInitial}
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-emerald-800 text-amber-200 font-serif font-bold text-lg flex items-center justify-center shrink-0 border border-slate-200">
+                        {professor.imageUrl ? (
+                          <img
+                            src={professor.imageUrl}
+                            alt={professor.name}
+                            className="w-full h-full object-cover object-top"
+                          />
+                        ) : (
+                          professor.avatarInitial
+                        )}
                       </div>
                       <div>
                         <div className="flex items-center gap-2">

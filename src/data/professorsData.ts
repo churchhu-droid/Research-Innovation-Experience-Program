@@ -1,4 +1,11 @@
 import { Professor } from '../types';
+import chutimaImg from '../assets/professors/chutima.png';
+import waraneeImg from '../assets/professors/waranee.png';
+import samawadeeImg from '../assets/professors/samawadee.png';
+import korranatImg from '../assets/professors/korranat.png';
+import sirikanlayaImg from '../assets/professors/sirikanlaya.png';
+import thawatchaiImg from '../assets/professors/thawatchai.png';
+import sontayaImg from '../assets/professors/sontaya.png';
 
 export const PROFESSORS_DATA: Professor[] = [
   {
@@ -94,6 +101,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'ช',
+    imageUrl: chutimaImg,
     badgeTag: 'ผลิตภัณฑ์ธรรมชาติ & นวัตกรรม'
   },
   {
@@ -190,6 +198,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'ว',
+    imageUrl: waraneeImg,
     badgeTag: 'Systematic Review & Telemedicine'
   },
   {
@@ -271,6 +280,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'ส',
+    imageUrl: samawadeeImg,
     badgeTag: 'การสกัดสมุนไพร & สารเคมีวิเคราะห์'
   },
   {
@@ -367,6 +377,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'ก',
+    imageUrl: korranatImg,
     badgeTag: 'Hydrogel & Skin Application (รับ 10 คน)'
   },
   {
@@ -462,6 +473,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'สิ',
+    imageUrl: sirikanlayaImg,
     badgeTag: 'AI & Data Analytics ในคลังยา'
   },
   {
@@ -557,6 +569,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'ธ',
+    imageUrl: thawatchaiImg,
     badgeTag: 'In Situ Forming Gel & นวัตกรรมสิทธิบัตร'
   },
   {
@@ -651,6 +664,7 @@ export const PROFESSORS_DATA: Professor[] = [
       }
     ],
     avatarInitial: 'สน',
+    imageUrl: sontayaImg,
     badgeTag: 'เชลแล็ก & วัสดุชีวภาพระบบนำส่งยา'
   }
 ];

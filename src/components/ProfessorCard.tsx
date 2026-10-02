@@ -51,8 +51,17 @@ export const ProfessorCard: React.FC<ProfessorCardProps> = ({
 
         {/* Professor Name & Title */}
         <div className="flex items-start gap-3.5 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-900 text-amber-200 font-serif font-bold text-lg flex items-center justify-center shrink-0 shadow-xs">
-            {professor.avatarInitial}
+          <div className="w-14 h-14 rounded-xl overflow-hidden bg-emerald-900 text-amber-200 font-serif font-bold text-lg flex items-center justify-center shrink-0 shadow-xs border border-slate-200/90">
+            {professor.imageUrl ? (
+              <img
+                src={professor.imageUrl}
+                alt={professor.name}
+                className="w-full h-full object-cover object-top"
+                loading="lazy"
+              />
+            ) : (
+              professor.avatarInitial
+            )}
           </div>
           <div className="min-w-0 flex-1">
             <h3

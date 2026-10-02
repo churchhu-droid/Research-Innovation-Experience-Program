@@ -74,6 +74,7 @@ export interface Professor {
   };
   reviews: Review[];
   avatarInitial: string;
+  imageUrl?: string;
   badgeTag: string;
 }
 
