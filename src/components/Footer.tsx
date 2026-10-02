@@ -15,9 +15,9 @@ export const Footer: React.FC = () => {
               <span>SU Pharmacy Advisor & Research Hub</span>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed max-w-lg">
-              ระบบแนะนำอาจารย์ที่ปรึกษาและโครงงานวิจัย คณะเภสัชศาสตร์ มหาวิทยาลัยศิลปากร
-              จัดทำขึ้นเพื่อให้นิสิตในคณะสามารถค้นหาหัวข้อวิจัยที่ตรงกับความสนใจ ตรวจสอบข้อกำหนด
-              และดูรีวิวสไตล์การดูแลและบรรยากาศการเรียนจากรุ่นพี่ได้อย่างสะดวก รวดเร็ว และครบถ้วน
+              ระบบแนะนำอาจารย์ที่ปรึกษา & โครงงานวิจัยสำหรับนักเรียน คณะเภสัชศาสตร์ มหาวิทยาลัยศิลปากร
+              จัดทำขึ้นเพื่อให้นักเรียนสามารถค้นหาหัวข้อวิจัยที่ตรงกับความสนใจ ตรวจสอบข้อกำหนด
+              และเลือกดูความเชี่ยวชาญเฉพาะด้านของอาจารย์แต่ละท่านได้อย่างสะดวก รวดเร็ว และครบถ้วน
             </p>
             <div className="text-2xs text-slate-500 pt-1">
               ข้อมูลอ้างอิงจากแบบฟอร์มเปิดรับหัวข้อวิจัย (Columns B1-R1) และเว็บไซต์ทางการคณะเภสัชศาสตร์ ม.ศิลปากร
@@ -94,7 +94,7 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Faculty of Pharmacy, Silpakorn University. สงวนลิขสิทธิ์
           </div>
           <div className="flex items-center gap-4">
-            <span>สำหรับนิสิตและบุคลากรคณะเภสัชศาสตร์</span>
+            <span>สำหรับนักเรียนและบุคลากรคณะเภสัชศาสตร์</span>
             <span aria-hidden="true">·</span>
             <a href="https://www.pharmacy.su.ac.th" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300">
               pharmacy.su.ac.th

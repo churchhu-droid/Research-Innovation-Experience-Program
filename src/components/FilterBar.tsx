@@ -103,8 +103,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               className="px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-md text-slate-700 text-xs focus:ring-1 focus:ring-emerald-700 focus:outline-none"
             >
               <option value="all">ทั้งหมด</option>
-              <option value="free">ฟรี / มีงบสนับสนุน (5 ท่าน)</option>
-              <option value="has_cost">มีค่าสารเคมี/อุปกรณ์ (2 ท่าน)</option>
+              <option value="free">ไม่มีค่าใช้จ่ายเพิ่มเติม (5 ท่าน)</option>
+              <option value="has_cost">มีค่าสารเคมีและอุปกรณ์ (2 ท่าน)</option>
             </select>
           </div>
 

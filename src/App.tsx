@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import {
   PROFESSORS_DATA,
-  DEPARTMENT_OPTIONS,
 } from './data/professorsData';
 import {
   Professor,
   DepartmentCategory,
   ParticipationFormat,
   ProjectType,
-  Review,
 } from './types';
 import {
   getStoredBookmarks,
   toggleStoredBookmark,
-  saveReviewToStorage,
-  mergeProfessorsWithUserReviews,
 } from './utils/storage';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
@@ -24,24 +20,18 @@ import { ProfessorDetailModal } from './components/ProfessorDetailModal';
 import { ComparisonDrawer } from './components/ComparisonDrawer';
 import { AdvisorQuizModal } from './components/AdvisorQuizModal';
 import { BookmarksModal } from './components/BookmarksModal';
-import { WriteReviewModal } from './components/WriteReviewModal';
 import { Footer } from './components/Footer';
 import {
   Sparkles,
   Scale,
-  Bookmark,
   CheckCircle2,
   Info,
-  Building2,
-  ChevronDown,
   ArrowUpDown,
   Compass,
 } from 'lucide-react';
 
 export default function App() {
-  const [professors, setProfessors] = useState<Professor[]>(() =>
-    mergeProfessorsWithUserReviews()
-  );
+  const [professors] = useState<Professor[]>(PROFESSORS_DATA);
   const [bookmarks, setBookmarks] = useState<string[]>(() => getStoredBookmarks());
   const [comparingIds, setComparingIds] = useState<string[]>([]);
 
@@ -51,14 +41,13 @@ export default function App() {
   const [selectedType, setSelectedType] = useState<ProjectType>('all');
   const [selectedFormat, setSelectedFormat] = useState<ParticipationFormat>('all');
   const [costFilter, setCostFilter] = useState<'all' | 'free' | 'has_cost'>('all');
-  const [sortBy, setSortBy] = useState<'rating' | 'capacity_desc' | 'name'>('rating');
+  const [sortBy, setSortBy] = useState<'capacity_desc' | 'name'>('capacity_desc');
 
   // Modal States
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
   const [isComparisonOpen, setIsComparisonOpen] = useState<boolean>(false);
   const [isQuizOpen, setIsQuizOpen] = useState<boolean>(false);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState<boolean>(false);
-  const [writeReviewProfId, setWriteReviewProfId] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const exploreRef = useRef<HTMLDivElement>(null);
@@ -99,20 +88,6 @@ export default function App() {
 
   const handleClearCompare = () => {
     setComparingIds([]);
-  };
-
-  const handleSubmitReview = (profId: string, review: Review) => {
-    saveReviewToStorage(profId, review);
-    // Reload updated professors with recalculated rating
-    const updatedProfs = mergeProfessorsWithUserReviews();
-    setProfessors(updatedProfs);
-
-    // If modal open, update selected professor view
-    if (selectedProfessor && selectedProfessor.id === profId) {
-      const refreshed = updatedProfs.find((p) => p.id === profId);
-      if (refreshed) setSelectedProfessor(refreshed);
-    }
-    showToast('บันทึกรีวิวของคุณเรียบร้อยแล้ว ขอบคุณสำหรับความคิดเห็น!');
   };
 
   // Filter and Search Logic
@@ -173,9 +148,6 @@ export default function App() {
         return true;
       })
       .sort((a, b) => {
-        if (sortBy === 'rating') {
-          return b.ratingSummary.average - a.ratingSummary.average;
-        }
         if (sortBy === 'capacity_desc') {
           return b.capacityNumber - a.capacityNumber;
         }
@@ -316,12 +288,11 @@ export default function App() {
               <select
                 value={sortBy}
                 onChange={(e) =>
-                  setSortBy(e.target.value as 'rating' | 'capacity_desc' | 'name')
+                  setSortBy(e.target.value as 'capacity_desc' | 'name')
                 }
                 className="px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium focus:ring-1 focus:ring-emerald-700 focus:outline-none cursor-pointer"
               >
-                <option value="rating">คะแนนรีวิวเฉลี่ยสูงสุด</option>
-                <option value="capacity_desc">จำนวนรับนิสิต (มากไปน้อย)</option>
+                <option value="capacity_desc">จำนวนรับนักเรียน (มากไปน้อย)</option>
                 <option value="name">ชื่ออาจารย์ (ก-ฮ)</option>
               </select>
             </div>
@@ -355,7 +326,6 @@ export default function App() {
                   onToggleBookmark={() => handleToggleBookmark(professor.id)}
                   onToggleCompare={() => handleToggleCompare(professor.id)}
                   onSelect={() => setSelectedProfessor(professor)}
-                  onWriteReview={() => setWriteReviewProfId(professor.id)}
                 />
               ))}
             </div>
@@ -366,13 +336,13 @@ export default function App() {
             <div className="md:col-span-2 space-y-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-emerald-300 uppercase tracking-wider">
                 <Compass className="w-4 h-4" />
-                <span>คำแนะนำสำหรับนิสิตคณะเภสัชศาสตร์ ม.ศิลปากร</span>
+                <span>คำแนะนำสำหรับนักเรียน</span>
               </div>
               <h3 className="text-xl font-bold font-serif text-white">
                 ยังไม่แน่ใจว่าจะเลือกอาจารย์ท่านใด?
               </h3>
               <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
-                ทำแบบประเมินสั้น ๆ 3 ข้อ เพื่อค้นหาอาจารย์และโครงงานที่ตรงกับสไตล์การเรียน
+                ทำแบบประเมินสั้น ๆ 3 ข้อ เพื่อค้นหาอาจารย์และโครงงานที่ตรงกับความสนใจ
                 ความถนัด และตารางเวลาที่คุณสะดวกที่สุด หรือเลือกเปรียบเทียบข้อมูลแบบเคียงข้างกันได้ทันที
               </p>
             </div>
@@ -410,9 +380,6 @@ export default function App() {
         onToggleBookmark={() => {
           if (selectedProfessor) handleToggleBookmark(selectedProfessor.id);
         }}
-        onOpenWriteReview={(id) => {
-          setWriteReviewProfId(id);
-        }}
       />
 
       <ComparisonDrawer
@@ -441,14 +408,6 @@ export default function App() {
           setComparingIds(bookmarks);
           setIsComparisonOpen(true);
         }}
-      />
-
-      <WriteReviewModal
-        isOpen={writeReviewProfId !== null}
-        onClose={() => setWriteReviewProfId(null)}
-        professors={professors}
-        defaultProfessorId={writeReviewProfId || undefined}
-        onSubmitReview={handleSubmitReview}
       />
     </div>
   );

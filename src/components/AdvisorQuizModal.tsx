@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Check, ArrowRight, RotateCcw, Star } from 'lucide-react';
+import { X, Sparkles, Check, ArrowRight, RotateCcw } from 'lucide-react';
 import { Professor } from '../types';
 
 interface AdvisorQuizModalProps {
@@ -310,8 +310,6 @@ export const AdvisorQuizModal: React.FC<AdvisorQuizModalProps> = ({
                           <span>{professor.participationFormat}</span>
                           <span aria-hidden="true">·</span>
                           <span>รับ {professor.capacityText}</span>
-                          <span aria-hidden="true">·</span>
-                          <span className="text-amber-600 font-medium">★ {professor.ratingSummary.average}</span>
                         </div>
                       </div>
                     </div>

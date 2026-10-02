@@ -38,12 +38,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight font-serif">
-            ระบบแนะนำอาจารย์ที่ปรึกษา & โครงงานวิจัยสำหรับนิสิต
+            ระบบแนะนำอาจารย์ที่ปรึกษา & โครงงานวิจัยสำหรับนักเรียน
           </h1>
 
           <p className="mt-4 text-base sm:text-lg text-slate-300 font-normal leading-relaxed">
-            ค้นหาข้อมูลหัวข้อวิจัย รูปแบบการเข้าคณะ เกณฑ์การรับสมัคร และดูรีวิวสไตล์การดูแลจากรุ่นพี่จริง
-            เพื่อช่วยให้นิสิตตัดสินใจเลือกอาจารย์ที่ปรึกษาที่ตรงกับเป้าหมายการเรียนรู้มากที่สุด
+            ค้นหาข้อมูลหัวข้อวิจัย รูปแบบการเข้าคณะ เกณฑ์การรับสมัคร และความเชี่ยวชาญเฉพาะด้าน
+            เพื่อช่วยให้นักเรียนตัดสินใจเลือกอาจารย์ที่ปรึกษาและโครงงานที่ตรงกับความสนใจมากที่สุด
           </p>
 
           {/* Search bar inside Hero */}
@@ -77,7 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Quick Quantitative Facts */}
-          <div className="mt-10 pt-8 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-4 text-slate-300">
+          <div className="mt-10 pt-8 border-t border-white/15 grid grid-cols-3 gap-4 text-slate-300">
             <div>
               <div className="text-2xl font-bold text-white font-serif tabular-nums">{totalProfessors} ท่าน</div>
               <div className="text-xs text-slate-400 mt-0.5">อาจารย์ผู้เปิดรับโครงงาน</div>
@@ -88,11 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             <div>
               <div className="text-2xl font-bold text-white font-serif tabular-nums">24–25 คน</div>
-              <div className="text-xs text-slate-400 mt-0.5">จำนวนรับนิสิตรวมทั้งหมด</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-amber-300 font-serif tabular-nums">4.9 / 5.0</div>
-              <div className="text-xs text-slate-400 mt-0.5">คะแนนความพึงพอใจการดูแล</div>
+              <div className="text-xs text-slate-400 mt-0.5">จำนวนรับนักเรียนรวมทั้งหมด</div>
             </div>
           </div>
         </div>

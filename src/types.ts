@@ -9,26 +9,6 @@ export type ProjectType =
   | 'Literature-based Research'
   | 'Digital Health / Data Analytics';
 
-export interface Review {
-  id: string;
-  studentName: string;
-  studentYear: string;
-  date: string;
-  rating: number; // 1-5
-  aspects: {
-    mentorship: number; // การให้คำปรึกษา
-    flexibility: number; // ความยืดหยุ่น/เวลา
-    learning: number; // ประสบการณ์ความรู้
-    approachability: number; // ความเป็นกันเอง เข้าถึงง่าย
-  };
-  headline: string;
-  comment: string;
-  pros: string;
-  adviceForJuniors: string;
-  likes: number;
-  verifiedStudent: boolean;
-}
-
 export interface Professor {
   id: string;
   name: string;
@@ -64,15 +44,6 @@ export interface Professor {
     workSchedule: string;
     idealStudent: string;
   };
-  ratingSummary: {
-    average: number;
-    mentorship: number;
-    flexibility: number;
-    learning: number;
-    approachability: number;
-    reviewCount: number;
-  };
-  reviews: Review[];
   avatarInitial: string;
   imageUrl?: string;
   badgeTag: string;

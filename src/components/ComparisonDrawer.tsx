@@ -102,13 +102,8 @@ export const ComparisonDrawer: React.FC<ComparisonDrawerProps> = ({
                           <X className="w-4 h-4" />
                         </button>
                       </div>
-                      <div className="mt-2 flex items-center gap-2">
-                        <div className="flex items-center text-amber-500 font-bold">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 mr-1" />
-                          <span>{prof.ratingSummary.average.toFixed(1)}</span>
-                        </div>
-                        <span className="text-slate-400" aria-hidden="true">·</span>
-                        <span className="text-slate-500">{prof.ratingSummary.reviewCount} รีวิว</span>
+                      <div className="mt-2 text-2xs text-emerald-900 font-medium">
+                        รับ {prof.capacityText} · {prof.participationFormat}
                       </div>
                     </th>
                   ))}
@@ -137,7 +132,7 @@ export const ComparisonDrawer: React.FC<ComparisonDrawerProps> = ({
 
                 {/* Capacity */}
                 <tr>
-                  <td className="p-3 font-semibold text-slate-700 bg-slate-50">จำนวนรับนิสิต</td>
+                  <td className="p-3 font-semibold text-slate-700 bg-slate-50">จำนวนรับนักเรียน</td>
                   {professors.map((p) => (
                     <td key={p.id} className="p-4 font-bold text-slate-900 border-l border-slate-200 align-top">
                       {p.capacityText}
@@ -184,7 +179,7 @@ export const ComparisonDrawer: React.FC<ComparisonDrawerProps> = ({
                       {p.hasExtraCost ? (
                         <span className="text-amber-800 font-semibold">{p.extraCostDetails}</span>
                       ) : (
-                        <span className="text-emerald-700 font-semibold">ไม่มี (มีงบสนับสนุน)</span>
+                        <span className="text-emerald-700 font-semibold">ไม่มีค่าใช้จ่ายเพิ่มเติม</span>
                       )}
                     </td>
                   ))}
@@ -212,7 +207,7 @@ export const ComparisonDrawer: React.FC<ComparisonDrawerProps> = ({
                         }}
                         className="w-full py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg font-semibold text-xs flex items-center justify-center gap-1 cursor-pointer"
                       >
-                        <span>ดูข้อมูลเต็ม & รีวิว</span>
+                        <span>ดูรายละเอียดโครงงาน</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </button>
                     </td>

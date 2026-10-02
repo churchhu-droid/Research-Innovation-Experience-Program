@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   X,
-  Star,
   Mail,
   Copy,
   Check,
@@ -9,27 +8,21 @@ import {
   BookOpen,
   GraduationCap,
   Sparkles,
-  MessageSquare,
   Users,
   Clock,
-  Calendar,
   Layers,
   Award,
   DollarSign,
-  AlertCircle,
   Bookmark,
   Share2,
-  ChevronRight,
-  ThumbsUp,
 } from 'lucide-react';
-import { Professor, Review } from '../types';
+import { Professor } from '../types';
 
 interface ProfessorDetailModalProps {
   professor: Professor | null;
   onClose: () => void;
   isBookmarked: boolean;
   onToggleBookmark: () => void;
-  onOpenWriteReview: (profId: string) => void;
 }
 
 export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
@@ -37,9 +30,8 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
   onClose,
   isBookmarked,
   onToggleBookmark,
-  onOpenWriteReview,
 }) => {
-  const [activeTab, setActiveTab] = useState<'project' | 'academic' | 'reviews'>('project');
+  const [activeTab, setActiveTab] = useState<'project' | 'academic'>('project');
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -108,7 +100,7 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
             <span aria-hidden="true">·</span>
             <span>{professor.academicTitle}</span>
             <span aria-hidden="true">·</span>
-            <span className="text-amber-300">รับนิสิต {professor.capacityText}</span>
+            <span className="text-amber-300">รับนักเรียน {professor.capacityText}</span>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-1">
@@ -129,7 +121,7 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
               </h2>
               <p className="text-sm text-slate-300 mt-0.5">{professor.nameEn}</p>
               
-              {/* Email & Rating */}
+              {/* Email & Faculty Link */}
               <div className="flex flex-wrap items-center gap-4 mt-3 text-xs">
                 <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10">
                   <Mail className="w-3.5 h-3.5 text-emerald-400" />
@@ -142,12 +134,6 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
                     {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                   {copiedEmail && <span className="text-emerald-300 font-medium text-2xs ml-1">คัดลอกแล้ว</span>}
-                </div>
-
-                <div className="flex items-center gap-1.5 text-slate-200">
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <span className="font-bold text-sm tabular-nums">{professor.ratingSummary.average.toFixed(1)}</span>
-                  <span className="text-slate-400">({professor.ratingSummary.reviewCount} รีวิวจากนิสิต)</span>
                 </div>
 
                 {professor.officialUrl && (
@@ -189,17 +175,6 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
           >
             <GraduationCap className="w-4 h-4 text-emerald-700" />
             <span>2. ประวัติการศึกษา & ความเชี่ยวชาญ</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('reviews')}
-            className={`py-3.5 px-4 border-b-2 transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
-              activeTab === 'reviews'
-                ? 'border-emerald-800 text-emerald-900 font-semibold bg-white'
-                : 'border-transparent text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            <MessageSquare className="w-4 h-4 text-emerald-700" />
-            <span>3. รีวิวการสอน & สไตล์อาจารย์ ({professor.reviews.length})</span>
           </button>
         </div>
 
@@ -404,7 +379,7 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
               <div className="space-y-3 pt-3 border-t border-slate-100">
                 <h4 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                   <Users className="w-4 h-4 text-emerald-800" />
-                  <span>สไตล์การดูแลและให้คำปรึกษานิสิต</span>
+                  <span>สไตล์การดูแลและให้คำปรึกษา</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   <div className="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100">
@@ -416,7 +391,7 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
                     <p className="text-slate-600">{professor.advisingStyle.workSchedule}</p>
                   </div>
                   <div className="p-3 bg-emerald-50/50 rounded-lg border border-emerald-100">
-                    <span className="font-semibold text-emerald-900 block mb-1">นิสิตที่เข้ากันได้ดี</span>
+                    <span className="font-semibold text-emerald-900 block mb-1">นักเรียนที่เหมาะสม</span>
                     <p className="text-slate-600">{professor.advisingStyle.idealStudent}</p>
                   </div>
                 </div>
@@ -435,161 +410,6 @@ export const ProfessorDetailModal: React.FC<ProfessorDetailModalProps> = ({
                   </a>
                 </div>
               )}
-            </div>
-          )}
-
-          {/* TAB 3: Student Reviews & Mentorship Ratings */}
-          {activeTab === 'reviews' && (
-            <div className="space-y-6">
-              {/* Rating Overview Card */}
-              <div className="p-5 bg-slate-50 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-                <div className="sm:col-span-4 text-center sm:text-left sm:border-r border-slate-200 sm:pr-6">
-                  <div className="text-4xl font-bold text-slate-900 font-serif tabular-nums">
-                    {professor.ratingSummary.average.toFixed(1)}
-                  </div>
-                  <div className="flex items-center justify-center sm:justify-start gap-1 text-amber-400 my-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`w-4 h-4 ${
-                          star <= Math.round(professor.ratingSummary.average) ? 'fill-amber-400' : 'text-slate-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <div className="text-xs text-slate-500">
-                    จาก {professor.ratingSummary.reviewCount} รีวิวของนิสิต
-                  </div>
-                  <button
-                    onClick={() => onOpenWriteReview(professor.id)}
-                    className="mt-3 w-full py-2 px-3 bg-emerald-800 hover:bg-emerald-900 text-white font-medium text-xs rounded-lg transition-colors cursor-pointer shadow-2xs"
-                  >
-                    เขียนรีวิวให้อาจารย์
-                  </button>
-                </div>
-
-                {/* Aspect Ratings Breakdown */}
-                <div className="sm:col-span-8 space-y-2.5 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-600">การให้คำปรึกษา & ชี้แนะ (Mentorship)</span>
-                    <span className="font-semibold text-slate-800 tabular-nums">
-                      {professor.ratingSummary.mentorship.toFixed(1)} / 5.0
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-emerald-700 h-full rounded-full"
-                      style={{ width: `${(professor.ratingSummary.mentorship / 5) * 100}%` }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-slate-600">ความยืดหยุ่น & การจัดสรรเวลา (Flexibility)</span>
-                    <span className="font-semibold text-slate-800 tabular-nums">
-                      {professor.ratingSummary.flexibility.toFixed(1)} / 5.0
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-emerald-700 h-full rounded-full"
-                      style={{ width: `${(professor.ratingSummary.flexibility / 5) * 100}%` }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-slate-600">ความรู้และประสบการณ์ที่ได้รับ (Learning)</span>
-                    <span className="font-semibold text-slate-800 tabular-nums">
-                      {professor.ratingSummary.learning.toFixed(1)} / 5.0
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-emerald-700 h-full rounded-full"
-                      style={{ width: `${(professor.ratingSummary.learning / 5) * 100}%` }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-slate-600">ความเป็นกันเอง เข้าถึงง่าย (Approachability)</span>
-                    <span className="font-semibold text-slate-800 tabular-nums">
-                      {professor.ratingSummary.approachability.toFixed(1)} / 5.0
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                    <div
-                      className="bg-emerald-700 h-full rounded-full"
-                      style={{ width: `${(professor.ratingSummary.approachability / 5) * 100}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Review List */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-sm font-bold text-slate-900">
-                    ความคิดเห็นและคำแนะนำจากรุ่นพี่ ({professor.reviews.length})
-                  </h4>
-                  <button
-                    onClick={() => onOpenWriteReview(professor.id)}
-                    className="text-xs text-emerald-800 hover:text-emerald-950 font-semibold cursor-pointer"
-                  >
-                    + เพิ่มรีวิวของคุณ
-                  </button>
-                </div>
-
-                {professor.reviews.map((rev) => (
-                  <div key={rev.id} className="p-4 bg-white rounded-xl border border-slate-200 space-y-2.5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-2 text-xs font-semibold text-slate-900">
-                          <span>{rev.studentName}</span>
-                          <span aria-hidden="true" className="text-slate-300">·</span>
-                          <span className="text-slate-500 font-normal">{rev.studentYear}</span>
-                          {rev.verifiedStudent && (
-                            <span className="text-2xs text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded font-medium">
-                              นิสิตเภสัชฯ ม.ศิลปากร
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-2xs text-slate-400 mt-0.5">{rev.date}</div>
-                      </div>
-
-                      <div className="flex items-center text-amber-500 text-xs font-bold bg-amber-50 px-2 py-1 rounded-md">
-                        <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400 mr-1" />
-                        <span>{rev.rating.toFixed(1)}</span>
-                      </div>
-                    </div>
-
-                    <h5 className="text-xs sm:text-sm font-bold text-slate-800">
-                      "{rev.headline}"
-                    </h5>
-
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {rev.comment}
-                    </p>
-
-                    {rev.pros && (
-                      <div className="text-xs text-emerald-900 bg-emerald-50/60 p-2 rounded-lg">
-                        <strong>จุดเด่น: </strong> {rev.pros}
-                      </div>
-                    )}
-
-                    {rev.adviceForJuniors && (
-                      <div className="text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
-                        <strong>คำแนะนำสำหรับรุ่นน้อง: </strong> {rev.adviceForJuniors}
-                      </div>
-                    )}
-
-                    <div className="pt-1 flex items-center justify-between text-2xs text-slate-400">
-                      <div className="flex items-center gap-1 text-slate-500">
-                        <ThumbsUp className="w-3 h-3" />
-                        <span>เป็นประโยชน์ ({rev.likes})</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           )}
         </div>

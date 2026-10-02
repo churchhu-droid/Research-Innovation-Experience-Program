@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Bookmark, ArrowRight, Trash2, Mail, ExternalLink, Star } from 'lucide-react';
+import { X, Bookmark, ArrowRight, Trash2 } from 'lucide-react';
 import { Professor } from '../types';
 
 interface BookmarksModalProps {
@@ -85,10 +85,9 @@ export const BookmarksModal: React.FC<BookmarksModalProps> = ({
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-sm text-slate-900">{prof.name}</span>
-                        <div className="flex items-center text-amber-500 text-xs font-bold">
-                          <Star className="w-3 h-3 fill-amber-400 mr-0.5" />
-                          <span>{prof.ratingSummary.average}</span>
-                        </div>
+                        <span className="text-2xs text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded font-medium">
+                          รับ {prof.capacityText}
+                        </span>
                       </div>
                       <p className="text-xs text-slate-500">{prof.departmentNameTh}</p>
                       <p className="text-xs text-slate-700 font-medium line-clamp-1 mt-1">
