@@ -1,0 +1,6 @@
+{
+  "name": "SU Pharmacy Advisor & Research Hub",
+  "description": "ระบบแนะนำอาจารย์ที่ปรึกษาและโครงงานวิจัย คณะเภสัชศาสตร์ มหาวิทยาลัยศิลปากร สำหรับนิสิตค้นหาข้อมูลและดูรีวิวการสอน",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
